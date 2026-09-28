@@ -1,0 +1,10 @@
+{
+  "name": "CopyDownload - Approve message",
+  "nodes": [
+    {"parameters":{"path":"approve-message","httpMethod":"GET","responseMode":"responseNode","options":{}},"id":"approve-webhook","name":"Approval webhook","type":"n8n-nodes-base.webhook","typeVersion":2,"position":[-420,0]},
+    {"parameters":{"method":"POST","url":"={{$env.APP_URL || 'http://host.docker.internal:3000'}}/api/integrations/approve","sendHeaders":true,"headerParameters":{"parameters":[{"name":"Content-Type","value":"application/json"},{"name":"x-n8n-secret","value":"={{$env.N8N_SHARED_SECRET}}"}]},"sendBody":true,"specifyBody":"json","jsonBody":"={\"message_id\": $json.query.message_id}","options":{}},"id":"approve-api","name":"Approve in MongoDB","type":"n8n-nodes-base.httpRequest","typeVersion":4.2,"position":[-120,0]},
+    {"parameters":{"respondWith":"json","responseBody":"={{$json}}","options":{}},"id":"approve-response","name":"Return result","type":"n8n-nodes-base.respondToWebhook","typeVersion":1.1,"position":[180,0]}
+  ],
+  "connections":{"Approval webhook":{"main":[[{"node":"Approve in MongoDB","type":"main","index":0}]]},"Approve in MongoDB":{"main":[[{"node":"Return result","type":"main","index":0}]]}},
+  "active":false,"settings":{},"versionId":"copydownload-approve-v1","meta":{"templateCredsSetupCompleted":true},"tags":[]
+}

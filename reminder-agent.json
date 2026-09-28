@@ -1,0 +1,10 @@
+{
+  "name": "CopyDownload - Quiet student reminder",
+  "nodes": [
+    {"parameters":{"rule":{"interval":[{"field":"days","daysInterval":1}]}},"id":"daily-trigger","name":"Daily reminder check","type":"n8n-nodes-base.scheduleTrigger","typeVersion":1.2,"position":[-420,0]},
+    {"parameters":{"method":"POST","url":"={{$env.APP_URL || 'http://host.docker.internal:3000'}}/api/integrations/reminder","sendHeaders":true,"headerParameters":{"parameters":[{"name":"Content-Type","value":"application/json"},{"name":"x-n8n-secret","value":"={{$env.N8N_SHARED_SECRET}}"}]},"sendBody":true,"specifyBody":"json","jsonBody":"={}","options":{}},"id":"reminder-api","name":"Create approval draft","type":"n8n-nodes-base.httpRequest","typeVersion":4.2,"position":[-120,0]},
+    {"parameters":{"jsCode":"return [{ json: { ok: true, reminder: $json } }];"},"id":"audit","name":"Audit result","type":"n8n-nodes-base.code","typeVersion":2,"position":[180,0]}
+  ],
+  "connections":{"Daily reminder check":{"main":[[{"node":"Create approval draft","type":"main","index":0}]]},"Create approval draft":{"main":[[{"node":"Audit result","type":"main","index":0}]]}},
+  "active":false,"settings":{},"versionId":"copydownload-reminder-v1","meta":{"templateCredsSetupCompleted":true},"tags":[]
+}
