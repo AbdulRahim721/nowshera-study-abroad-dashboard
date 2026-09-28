@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root { background:#f7f9f7; color:#102a43; }
+* { box-sizing:border-box; }
+body { margin:0; font-family: Arial, Helvetica, sans-serif; }
+button,input,select { font:inherit; }
+.scrollbar::-webkit-scrollbar { width:6px; height:6px; }.scrollbar::-webkit-scrollbar-thumb { background:#cbd5e1;border-radius:99px; }
+.scene { perspective: 1200px; }
+.float-card { transform-style: preserve-3d; animation: float 7s ease-in-out infinite; }
+.float-card:nth-child(2) { animation-delay: -2s; }
+.float-card:nth-child(3) { animation-delay: -4s; }
+.glass { background: rgba(255,255,255,.72); backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,.7); }
+.orb { position:absolute; border-radius:999px; filter:blur(1px); opacity:.8; pointer-events:none; }
+@keyframes float { 0%,100% { transform: translateY(0) rotateX(0deg) rotateY(0deg); } 50% { transform: translateY(-10px) rotateX(2deg) rotateY(-2deg); } }
+@keyframes pulse-ring { 0% { transform:scale(.9); opacity:.8 } 70% { transform:scale(1.15); opacity:0 } 100% { opacity:0 } }
+.pulse-ring { animation:pulse-ring 2.5s infinite; }
